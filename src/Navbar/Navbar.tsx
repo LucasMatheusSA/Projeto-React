@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import {createStyles, makeStyles, Theme, ThemeProvider} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +9,7 @@ import Icon from './uisque.png';
 
 import {Link} from 'react-router-dom';
 import withStyles from "@material-ui/core/styles/withStyles";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 const LoginButton = withStyles({
     root: {
@@ -18,6 +19,7 @@ const LoginButton = withStyles({
         padding: '6px 12px',
         color: '#A67E6E',
         lineHeight: 1.5,
+        float: 'right',
         fontFamily: [
             'Malaga',
         ].join(','),
@@ -27,11 +29,8 @@ const LoginButton = withStyles({
         },
         '&:active': {
             boxShadow: 'none',
-            backgroundColor: '#0062cc',
-            borderColor: '#005cbf',
-        },
-        '&:focus': {
-            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+            backgroundColor: '#52482B',
+            borderColor: '#52482B',
         },
     },
 })(Button);
@@ -44,6 +43,8 @@ const CatalogButton = withStyles({
         padding: '6px 12px',
         color: '#A67E6E',
         lineHeight: 1.5,
+        marginRight: '5px',
+        float: 'right',
         fontFamily: [
             'Malaga',
         ].join(','),
@@ -53,11 +54,8 @@ const CatalogButton = withStyles({
         },
         '&:active': {
             boxShadow: 'none',
-            backgroundColor: '#0062cc',
-            borderColor: '#005cbf',
-        },
-        '&:focus': {
-            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+            backgroundColor: '#52482B',
+            borderColor: '#52482B',
         },
     },
 })(Button);
@@ -74,12 +72,25 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         title: {
             flexGrow: 1,
-            textAlign: 'center',
+            color: '#A67E6E',
+            fontFamily: [
+                'Malaga',
+            ].join(','),
         },
     }),
 );
 
+const theme = createMuiTheme();
 
+theme.typography.h1 = {
+    fontSize: '1.2rem',
+    '@media (min-width:600px)': {
+        fontSize: '1.5rem',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '2.4rem',
+    },
+};
 
 export default function ButtonAppBar() {
     const classes = useStyles();
@@ -87,15 +98,18 @@ export default function ButtonAppBar() {
     return (
         <div className={classes.root}>
             <AppBar position="static">
+
                 <Toolbar className="body">
                     <img className="square" src={Icon} alt="website logo"/>
-                    <Typography variant="h6" className={classes.title}>
-                        Whisky's
-                    </Typography>
+                    <ThemeProvider theme={theme}>
+                        <Typography align="justify" variant="h1" className={classes.title}>
+                            WHISKY'S
+                        </Typography>
+                    </ThemeProvider>
                     <Link to="/Catalogo" style={{textDecoration: 'none'}}>
-                        <CatalogButton className="padding-right" disableRipple color="inherit">Catálogo</CatalogButton>
+                        <CatalogButton className="button-space" disableRipple color="inherit">Catálogo</CatalogButton>
                     </Link>
-                    <LoginButton className="padding-right" disableRipple color="inherit">Login / Register</LoginButton>
+                    <LoginButton disableRipple color="inherit">Login / Register</LoginButton>
                 </Toolbar>
             </AppBar>
         </div>
