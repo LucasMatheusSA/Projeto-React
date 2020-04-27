@@ -32,11 +32,17 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
           <Typography variant="h6" className={classes.title}>
             Whisky's
           </Typography>
           <Link to="/Catalogo">
-            <Button color="inherit">Catálogo</Button>
+            <Button color="secondary">Catálogo</Button>
+          </Link>
+          <Link to="/Usuario">
+            <Button color="secondary">Usuário</Button>
           </Link>
         <Button color="inherit">Login / Register</Button>
         </Toolbar>
