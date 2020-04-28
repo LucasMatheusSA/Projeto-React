@@ -3,8 +3,8 @@ import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import Nav from './Navbar/Navbar';
-import Catalogo from './Componentes/Catalogo/Catalogo';
-import About from './Componentes/About/About';
+import Catalogo from './Views/Catalogo/Catalogo';
+import About from './Views/About/About';
 import {Container} from "@material-ui/core";
 
 
