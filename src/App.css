@@ -39,9 +39,19 @@
 }
 
 .homeImg{
+  background-image: url("./Images/Home/whisky_wallpaper.jpg");
   height: 100%;
   margin: 0;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.img{
+  height: 100%;
+  margin: 0;
+}
+
+.title{
+  float: right;
 }

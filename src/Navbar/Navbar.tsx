@@ -102,7 +102,7 @@ export default function ButtonAppBar() {
                 <Toolbar className="body">
                     <img className="square" src={Icon} alt="website logo"/>
                     <ThemeProvider theme={theme}>
-                        <Typography align="justify" variant="h1" className={classes.title}>
+                        <Typography align="justify" variant="h3" className={classes.title}>
                             WHISKY'S
                         </Typography>
                     </ThemeProvider>

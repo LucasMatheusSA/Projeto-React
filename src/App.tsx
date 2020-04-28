@@ -5,10 +5,10 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Nav from './Navbar/Navbar';
 import Catalogo from './Views/Catalogo/Catalogo';
 import About from './Views/About/About';
-import {Container} from "@material-ui/core";
+import {Container, Divider, Grid } from "@material-ui/core";
+import Card from './Components/Card';
 
 import pathHomeImg from './Images/Home/whisky_wallpaper.jpg';
-
 
 function App() {
     return (
@@ -28,13 +28,27 @@ function App() {
 
 const Home = () => (
     <Container fixed>
+        <div className="homeImg">
+            <h1> Whisky's </h1>
+            <Divider variant="inset" />
+            <h4> Catalogo de whikies, melhor sabor e qualidade. </h4>
+        </div> 
         <div>
-            <div className="homeImg" style={{backgroundImage: `url(${pathHomeImg})`}}>
-                <h2> Title </h2>
-                <h4> Subtitle stuf that should explain more </h4>
-            </div> 
-
-            <h1>Home Page</h1>
+            <img className="img" src={pathHomeImg} alt="website logo"/>
+            <h1> Whisky's </h1>
+            <Divider variant="inset" />
+            <h4> Catalogo de whikies, melhor sabor e qualidade. </h4>
+            <Grid container spacing={3}>
+                <Grid item xs={4}>
+                    <Card />
+                </Grid>
+                <Grid item xs={4}>
+                    <Card />
+                </Grid>
+                <Grid item xs={4}>
+                    <Card />
+                </Grid>
+            </Grid>
         </div>
     </Container>
 );
