@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import './Navbar.css';
-import Icon from '../Imagens/Navbar/icon_whisky.png';
+import Icon from '../Images/Navbar/icon_whisky.png';
 
 import {Link} from 'react-router-dom';
 import withStyles from "@material-ui/core/styles/withStyles";
