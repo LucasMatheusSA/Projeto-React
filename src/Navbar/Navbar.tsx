@@ -1,48 +1,120 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {createStyles, makeStyles, Theme, ThemeProvider} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import './Navbar.css';
+import Icon from './uisque.png';
 
-import { BrowserRouter as Router, Route,Link,Redirect } from 'react-router-dom';
-import icon from '../Img/icon_whisky.png';
+import {Link} from 'react-router-dom';
+import withStyles from "@material-ui/core/styles/withStyles";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+
+const LoginButton = withStyles({
+    root: {
+        boxShadow: 'none',
+        textTransform: 'none',
+        fontSize: 18,
+        padding: '6px 12px',
+        color: '#A67E6E',
+        lineHeight: 1.5,
+        float: 'right',
+        fontFamily: [
+            'Malaga',
+        ].join(','),
+        '&:hover': {
+            backgroundColor: '#3d3c3c',
+            boxShadow: 'none',
+        },
+        '&:active': {
+            boxShadow: 'none',
+            backgroundColor: '#52482B',
+            borderColor: '#52482B',
+        },
+    },
+})(Button);
+
+const CatalogButton = withStyles({
+    root: {
+        boxShadow: 'none',
+        textTransform: 'none',
+        fontSize: 18,
+        padding: '6px 12px',
+        color: '#A67E6E',
+        lineHeight: 1.5,
+        marginRight: '5px',
+        float: 'right',
+        fontFamily: [
+            'Malaga',
+        ].join(','),
+        '&:hover': {
+            backgroundColor: '#3d3c3c',
+            boxShadow: 'none',
+        },
+        '&:active': {
+            boxShadow: 'none',
+            backgroundColor: '#52482B',
+            borderColor: '#52482B',
+        },
+    },
+})(Button);
 
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }),
+    createStyles({
+        root: {
+            maxHeight: '64px',
+            width: 'auto',
+        },
+        menuButton: {
+            marginRight: theme.spacing(2),
+        },
+        title: {
+            flexGrow: 1,
+            color: '#A67E6E',
+            fontFamily: [
+                'Malaga',
+            ].join(','),
+        },
+    }),
 );
 
-export default function ButtonAppBar() {
-  const classes = useStyles();
+const theme = createMuiTheme();
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Whisky's
-          </Typography>
-          <Link to="/Catalogo">
-            <Button color="inherit">Catálogo</Button>
-          </Link>
-        <Button color="inherit">Login / Register</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+theme.typography.h1 = {
+    fontSize: '1.2rem',
+    '@media (min-width:600px)': {
+        fontSize: '1.5rem',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '2.4rem',
+    },
+};
+
+export default function ButtonAppBar() {
+    const classes = useStyles();
+
+    return (
+        <div className={classes.root}>
+            <AppBar position="static">
+
+                <Toolbar className="body">
+                    <img className="square" src={Icon} alt="website logo"/>
+                    <ThemeProvider theme={theme}>
+                        <Typography align="justify" variant="h1" className={classes.title}>
+                            WHISKY'S
+                        </Typography>
+                    </ThemeProvider>
+                    <Link to="/Catalogo" style={{textDecoration: 'none'}}>
+                        <CatalogButton className="button-space" disableRipple color="inherit">Catálogo</CatalogButton>
+                    </Link>
+                    <LoginButton disableRipple color="inherit">Login / Register</LoginButton>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
+
 }
 
 

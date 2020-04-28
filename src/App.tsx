@@ -1,31 +1,35 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import Nav from './Navbar/Navbar';
 import Catalogo from './Componentes/Catalogo/Catalogo';
 import About from './Componentes/About/About';
+import {Container} from "@material-ui/core";
 
 
 function App() {
-  return (
-    <Router>
-    <div className="App">
-      <Nav/>
-      <Switch>
-        <Route path="/" exact component={Home}/>
-        <Route path="/Catalogo" component={Catalogo}/>
-      </Switch>
-      <About/>
-    </div>
-  </Router>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <Nav/>
+                <Switch>
+                    <Route path="/" exact component={Home}/>
+                    <Route path="/Catalogo" component={Catalogo}/>
+                </Switch>
+                <About/>
+            </div>
+
+        </Router>
+    );
 }
 
 const Home = () => (
-  <div>
-    <h1>Home Page</h1>
-  </div>
+    <Container fixed>
+        <div>
+            <h1>Home Page</h1>
+        </div>
+    </Container>
 );
 
 export default App;
