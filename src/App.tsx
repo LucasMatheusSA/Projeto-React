@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {Divider, Grid, Container } from "@material-ui/core";
 
 import Nav from './Navbar/Navbar';
 import Catalogo from './Views/Catalogo/Catalogo';
 import About from './Views/About/About';
-import {Container, Divider, Grid } from "@material-ui/core";
-import Card from './Components/Card';
+import Card from './Components/Card/Card';
+import HomeImage from './Components/HomeImage/HomeImage';
+import imgCup from './Images/Home/whisky_cup.jpg';
 
-import pathHomeImg from './Images/Home/whisky_wallpaper.jpg';
 
 function App() {
     return (
@@ -27,17 +28,12 @@ function App() {
 }
 
 const Home = () => (
-    <Container fixed>
-        <div className="homeImg">
-            <h1> Whisky's </h1>
-            <Divider variant="inset" />
-            <h4> Catalogo de whikies, melhor sabor e qualidade. </h4>
-        </div> 
+        <Container fixed>
+            <HomeImage/>
         <div>
-            <img className="img" src={pathHomeImg} alt="website logo"/>
-            <h1> Whisky's </h1>
-            <Divider variant="inset" />
-            <h4> Catalogo de whikies, melhor sabor e qualidade. </h4>
+            <h1> Mais populares </h1>
+            <Divider variant="middle" />
+            <p> Whiskies mais populares e favoritados entre os usuários.</p>
             <Grid container spacing={3}>
                 <Grid item xs={4}>
                     <Card />
@@ -49,8 +45,31 @@ const Home = () => (
                     <Card />
                 </Grid>
             </Grid>
+            <h1> Listagem </h1>
+            <Divider variant="middle" />
+            <p> Listagem de whiskies.</p>
+            <Grid container spacing={2}>
+                <Grid item xs={4}>
+                    <Card />
+                </Grid>
+                <Grid item xs={4}>
+                    <Card />
+                </Grid>
+                <Grid item xs={4}>
+                    <Card />
+                </Grid>
+                <Grid item xs={4}>
+                    <Card />
+                </Grid>
+                <Grid item xs={4}>
+                    <Card />
+                </Grid>
+                <Grid item xs={4}>
+                    <Card />
+                </Grid>
+            </Grid>
         </div>
-    </Container>
+        </Container>
 );
 
 export default App;
