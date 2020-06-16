@@ -3,6 +3,9 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import {Container, Grid, Divider} from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
 
 import Card from '../../Components/Card/Card';
 
@@ -12,6 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
       '& > * + *': {
         marginTop: theme.spacing(3),
       },
+    },
+    margin: {
+      margin: theme.spacing(1),
     },
   }),
 );
@@ -28,29 +34,29 @@ function Catalogo() {
             <Divider variant="middle" />
           </Grid>
 
-          <Grid item xs={6}>
-            <Autocomplete
-              multiple
-              limitTags={2}
-              id="combobox-sabores"
-              options={Sabores}
-              getOptionLabel={(option) => option.title}
-              defaultValue={[Sabores[0]]}
-              renderInput={(params) => (
-                <TextField {...params} variant="outlined" label="Sabor" placeholder="Sabor" />
-              )}
-            />
+          <Grid item xs={4}>
+            <FormControl fullWidth className={classes.margin}>
+                <InputLabel htmlFor="standard-adornment-amount">Nome</InputLabel>
+                <Input id="id-nome-categoria"/>
+            </FormControl>
+          </Grid>
+          
+          <Grid item xs={4}>
+              <FormControl fullWidth className={classes.margin}>
+                  <InputLabel htmlFor="standard-adornment-amount">Idade</InputLabel>
+                  <Input id="id-idade-categoria" type="number"/>
+              </FormControl>
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <Autocomplete
               multiple
               limitTags={2}
-              id="combobox-notas"
-              options={Notas}
+              id="id-combobox-categoria"
+              options={Categoria}
               getOptionLabel={(option) => option.title}
               renderInput={(params) => (
-                <TextField {...params} variant="outlined" label="Notas" placeholder="Notas" />
+                <TextField {...params} variant="outlined" label="Categoria" placeholder="categoria" />
               )}
             />
           </Grid>
@@ -83,7 +89,7 @@ function Catalogo() {
 
 export default Catalogo;
 
-const Sabores = [
+const Categoria = [
   { title: 'Amargo' },
   { title: 'Azedo' },
   { title: 'Salgado'},

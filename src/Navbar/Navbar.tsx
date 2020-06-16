@@ -109,7 +109,9 @@ export default function ButtonAppBar() {
                     <Link to="/Catalogo" style={{textDecoration: 'none'}}>
                         <CatalogButton className="button-space" disableRipple color="inherit">Catálogo</CatalogButton>
                     </Link>
-                    <LoginButton disableRipple color="inherit">Login / Register</LoginButton>
+                    <Link to="/Login" style={{textDecoration: 'none'}}>
+                        <LoginButton className="button-space" disableRipple color="inherit">Login / Register</LoginButton>
+                    </Link>
                 </Toolbar>
             </AppBar>
         </div>
