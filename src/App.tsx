@@ -14,11 +14,11 @@ import About from './Views/About/About';
 import Whisky from './Views/Whisky/Whisky';
 import User from './Views/User/User';
 import Card from './Components/Card/Card';
-import HomeImage from './Components/HomeImage/HomeImage';
+import HomeImage from './Components/Home/HomeImage';
+import HalfImage from './Components/Home/HomeIformations';
 import imgCup from './Images/Home/whisky_cup.jpg';
 import UserIcon from '@material-ui/icons/Add';
 
-import ServerCadastroUser from './server/serverCadastro';
 
 
 function App() {
@@ -62,6 +62,8 @@ const Home = () => (
                     <Card />
                 </Grid>
             </Grid>
+            <br/>
+            <HalfImage/>
             <h1> Listagem </h1>
             <Divider variant="middle" />
             <p> Listagem de whiskies.</p>
