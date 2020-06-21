@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {Divider, Grid, Container } from "@material-ui/core";
-import {Transition} from 'react-spring/renderprops';
-import {useTransition, animated} from 'react-spring';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Divider, Grid, Container } from "@material-ui/core";
+import { Transition } from 'react-spring/renderprops';
+import { useTransition, animated } from 'react-spring';
 import Fab from '@material-ui/core/Fab';
+
 
 import Nav from './Navbar/Navbar';
 import Catalogo from './Views/Catalogo/Catalogo';
@@ -17,38 +18,36 @@ import HomeImage from './Components/HomeImage/HomeImage';
 import imgCup from './Images/Home/whisky_cup.jpg';
 import UserIcon from '@material-ui/icons/Add';
 
+import ServerCadastroUser from './server/serverCadastro';
+
 
 function App() {
 
     return (
         <Router>
             <div className="App">
-                <Nav/>
+                <Nav />
                 <Switch>
-                    <Route path="/" exact component={Home}/>
-                    <Route path="/Catalogo" component={Catalogo}/>
-                    <Route path="/Login" component={Login}/>
-                    <Route path="/User" component={User}/>
-                    <Route path="/Whisky" component={Whisky}/>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/Catalogo" component={Catalogo} />
+                    <Route path="/Login" component={Login} />
+                    <Route path="/User" component={User} />
+                    <Route path="/Whisky" component={Whisky} />
                 </Switch>
-                <About/>
+                <About />
             </div>
 
         </Router>
     );
 }
 
+
+
 const Home = () => (
-        <Container fixed>
-            <HomeImage/>
+    <Container fixed>
+        <br />
+        <HomeImage/>
         <div>
-            {/* <Transition
-                items={items} keys={item => item.key}
-                from={{ transform: 'translate3d(0,-40px,0)' }}
-                enter={{ transform: 'translate3d(0,0px,0)' }}
-                leave={{ transform: 'translate3d(0,-40px,0)' }}>
-                {item => props => <div style={props}>{item.text}</div>}
-            </Transition> */}
             <h1> Mais populares </h1>
             <Divider variant="middle" />
             <p> Whiskies mais populares e favoritados entre os usuários.</p>
@@ -87,7 +86,7 @@ const Home = () => (
                 </Grid>
             </Grid>
         </div>
-        </Container>
+    </Container>
 );
 
 export default App;

@@ -101,15 +101,17 @@ export default function ButtonAppBar() {
 
                 <Toolbar className="body">
                     <img className="square" src={Icon} alt="website logo"/>
+                    <Link to="/" style={{textDecoration: 'none'}}>
                     <ThemeProvider theme={theme}>
                         <Typography align="justify" variant="h3" className={classes.title}>
                             WHISKY'S
                         </Typography>
                     </ThemeProvider>
-                    <Link to="/Catalogo" style={{textDecoration: 'none'}}>
+                    </Link>
+                    <Link to="/Catalogo" style={{textDecoration: 'none' ,position: "absolute",  right: 200 }}>
                         <CatalogButton className="button-space" disableRipple color="inherit">Catálogo</CatalogButton>
                     </Link>
-                    <Link to="/Login" style={{textDecoration: 'none'}}>
+                    <Link to="/Login" style={{textDecoration: 'none' ,position: "absolute",  right: 50 }}>
                         <LoginButton className="button-space" disableRipple color="inherit">Login / Register</LoginButton>
                     </Link>
                 </Toolbar>

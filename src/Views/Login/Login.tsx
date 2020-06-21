@@ -1,12 +1,26 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import {Container, Grid, Divider} from '@material-ui/core';
+import axios from 'axios';
 
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+
+import CadastroUser from '../../Components/Login/userCadastro';
+import LoginUser from '../../Components/Login/userLogin';
+
+const userCadastro = {
+  "login":"",
+  "senha":"",
+  "email":""
+}
+
+const userLogin = {
+  "login":"",
+  "senha":""
+}
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,6 +40,36 @@ function Login() {
 
   const classes = useStyles();
 
+  function cadastrar (e){
+    e.preventDefault();
+
+    userCadastro.login = e.target.elements.login.value;
+    userCadastro.senha = e.target.elements.senha.value;
+    userCadastro.email = e.target.elements.email.value;
+
+    axios.post(`https://project-whiskies-backend.herokuapp.com/api/user`, { userCadastro })
+       .then(res => {
+         console.log(res);
+         console.log(res.data);
+    })
+
+  }
+
+  function logar (e){
+    e.preventDefault();
+
+    userLogin.login = e.target.elements.inputLogin.value;
+    userLogin.senha = e.target.elements.inputSenha.value;
+    
+
+    axios.post(`https://project-whiskies-backend.herokuapp.com/api/user/auth`, { userLogin })
+       .then(res => {
+         console.log(res);
+         console.log(res.data);
+    })
+
+  }
+
   return (
     <Container fixed>
       <div className={classes.root}>
@@ -35,38 +79,7 @@ function Login() {
             <h1> Login </h1>
             <Divider variant="middle" />
 
-            <Grid container spacing={3}>
-
-                <Grid item xs={1}>
-                </Grid>
-                <Grid item xs={10}>
-                    <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">Login</InputLabel>
-                        <Input id="id-login-cadastro"/>
-                    </FormControl>
-                </Grid>
-                <Grid item xs={1}>
-                </Grid>
-
-                <Grid item xs={1}>
-                </Grid>
-                <Grid item xs={10}>
-                    <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">Senha</InputLabel>
-                        <Input id="id-senha-cadastro" type="password"/>
-                    </FormControl>
-                </Grid>
-                <Grid item xs={1}>
-                </Grid>
-
-                <Grid item xs={4}>
-                    <Button variant="contained" color="primary">Logar</Button>
-                </Grid>
-                <Grid item xs={8}>
-                </Grid>
-
-
-            </Grid>
+            <LoginUser login={logar}/>
             
           </Grid>
 
@@ -74,52 +87,7 @@ function Login() {
             <h1> Cadastro </h1>
             <Divider variant="middle" />
 
-            {/* <serverCadastroUser /> */}
-
-            <Grid container spacing={3}>
-
-                <Grid item xs={1}>
-                </Grid>
-                <Grid item xs={10}>
-                    <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">Login</InputLabel>
-                        <Input id="id-login-cadastro" name="login" />
-                    </FormControl>
-                </Grid>
-                <Grid item xs={1}>
-                </Grid>
-
-                <Grid item xs={1}>
-                </Grid>
-                <Grid item xs={10}>
-                    <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">Senha</InputLabel>
-                        <Input id="id-senha-cadastro" type="password" name="senha" />
-                    </FormControl>
-                </Grid>
-                <Grid item xs={1}>
-                </Grid>
-
-                <Grid item xs={1}>
-                </Grid>
-                <Grid item xs={10}>
-                    <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">E-mail</InputLabel>
-                        <Input id="id-email-cadastro" name="email" />
-                    </FormControl>
-                </Grid>
-                <Grid item xs={1}>
-                </Grid>
-
-                <Grid item xs={1}>
-                </Grid>
-                <Grid item xs={3}>
-                    <Button type="submit" variant="contained" color="primary">Cadastrar</Button>
-                </Grid>
-                <Grid item xs={8}>
-                </Grid>
-
-            </Grid>
+            <CadastroUser cadastrar={cadastrar} /> 
 
           </Grid>
 
