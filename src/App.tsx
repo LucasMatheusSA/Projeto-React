@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
 import { Divider, Grid, Container } from "@material-ui/core";
 import { Transition } from 'react-spring/renderprops';
 import { useTransition, animated } from 'react-spring';
@@ -18,7 +18,31 @@ import HomeImage from './Components/Home/HomeImage';
 import HalfImage from './Components/Home/HomeIformations';
 import imgCup from './Images/Home/whisky_cup.jpg';
 import UserIcon from '@material-ui/icons/Add';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
+function checkLogin(){
+
+    let token = localStorage.getItem('token');
+    let config = {
+        headers: {
+            'Authorization': token
+        }
+    };
+    if (token == null) {
+        toast.error("Para visualizar os whiskies é necessario fazer login!");
+    } else {
+        axios.get(`https://project-whiskies-backend.herokuapp.com/api/whisky/whisky-list`, config)
+        .then(res => {
+            if (res.status == 403) {
+            }
+            console.log(res);
+            console.log(res.data);
+        })
+    }
+}
+
+checkLogin();
 
 
 function App() {
@@ -42,11 +66,10 @@ function App() {
 }
 
 
-
 const Home = () => (
     <Container fixed>
         <br />
-        <HomeImage/>
+        <HomeImage />
         <div>
             <h1> Mais populares </h1>
             <Divider variant="middle" />
@@ -62,8 +85,8 @@ const Home = () => (
                     <Card />
                 </Grid>
             </Grid>
-            <br/>
-            <HalfImage/>
+            <br />
+            <HalfImage />
             <h1> Listagem </h1>
             <Divider variant="middle" />
             <p> Listagem de whiskies.</p>

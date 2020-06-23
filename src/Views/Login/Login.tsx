@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import {Container, Grid, Divider} from '@material-ui/core';
+import { toast } from 'react-toastify';
+import {useHistory} from "react-router-dom";
 import axios from 'axios';
 
 import FormControl from '@material-ui/core/FormControl';
@@ -22,7 +24,6 @@ const userLogin = {
   "senha":""
 }
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -36,9 +37,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+function refreshPage() {
+  window.location.reload(false);
+}
+
 function Login() {
 
   const classes = useStyles();
+  let hist = useHistory();
 
   function cadastrar (e){
     e.preventDefault();
@@ -47,14 +53,20 @@ function Login() {
     userCadastro.senha = e.target.elements.senha.value;
     userCadastro.email = e.target.elements.email.value;
 
-    axios.post(`https://project-whiskies-backend.herokuapp.com/api/user`, { userCadastro })
+    axios.post(`https://project-whiskies-backend.herokuapp.com/api/user`,  userCadastro)
        .then(res => {
+        if(res.status == 200){
+          toast.success("Usuário cadastrado com sucesso!");
+        }else{
+          toast.error("Erro ao cadastrar usuário!");
+        }
          console.log(res);
          console.log(res.data);
     })
 
   }
 
+  
   function logar (e){
     e.preventDefault();
 
@@ -62,8 +74,26 @@ function Login() {
     userLogin.senha = e.target.elements.inputSenha.value;
     
 
-    axios.post(`https://project-whiskies-backend.herokuapp.com/api/user/auth`, { userLogin })
+    axios.post(`https://project-whiskies-backend.herokuapp.com/api/user/auth`, userLogin)
        .then(res => {
+
+        if(res.status === 200){
+
+          if(res.data.roles.length == 1){
+            localStorage.setItem('permition',"ROLE_USER");
+          }else{
+            localStorage.setItem('permition',"ROLE_ADMIN");
+          }
+
+          localStorage.setItem('token',"Bearer " + res.data.token);
+
+          toast.success("Logado com sucesso!");
+          hist.push("/");
+          refreshPage();
+
+        }else{
+          toast.error("Erro ao logar, login ou senha incorretos!");
+        }
          console.log(res);
          console.log(res.data);
     })

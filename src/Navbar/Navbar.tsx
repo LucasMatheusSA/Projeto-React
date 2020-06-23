@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStyles, makeStyles, Theme, ThemeProvider} from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme, ThemeProvider } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -7,9 +7,10 @@ import Button from '@material-ui/core/Button';
 import './Navbar.css';
 import Icon from '../Images/Navbar/icon_whisky.png';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import withStyles from "@material-ui/core/styles/withStyles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import ButtonAccess from '../Components/Buttons/ButtonAccess';
 
 const LoginButton = withStyles({
     root: {
@@ -61,6 +62,7 @@ const CatalogButton = withStyles({
 })(Button);
 
 
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -92,6 +94,8 @@ theme.typography.h1 = {
     },
 };
 
+const permition = localStorage.getItem('permition') != "ROLE_ADMIN" ? localStorage.getItem('permition') == "ROLE_USER" ? 1 : 0 : 2;
+
 export default function ButtonAppBar() {
     const classes = useStyles();
 
@@ -100,20 +104,21 @@ export default function ButtonAppBar() {
             <AppBar position="static">
 
                 <Toolbar className="body">
-                    <img className="square" src={Icon} alt="website logo"/>
-                    <Link to="/" style={{textDecoration: 'none'}}>
-                    <ThemeProvider theme={theme}>
-                        <Typography align="justify" variant="h3" className={classes.title}>
-                            WHISKY'S
+                    <img className="square" src={Icon} alt="website logo" />
+                    <Link to="/" style={{ textDecoration: 'none' }}>
+                        <ThemeProvider theme={theme}>
+                            <Typography align="justify" variant="h3" className={classes.title}>
+                                WHISKY'S
                         </Typography>
-                    </ThemeProvider>
+                        </ThemeProvider>
                     </Link>
-                    <Link to="/Catalogo" style={{textDecoration: 'none' ,position: "absolute",  right: 200 }}>
+                    <Link to="/Catalogo" style={{ textDecoration: 'none', position: "absolute", right: 100 }} hidden={permition == 0}>
                         <CatalogButton className="button-space" disableRipple color="inherit">Catálogo</CatalogButton>
                     </Link>
-                    <Link to="/Login" style={{textDecoration: 'none' ,position: "absolute",  right: 50 }}>
+                    <ButtonAccess/>
+                    {/* <Link to="/Login" style={{ textDecoration: 'none', position: "absolute", right: 50 }}>
                         <LoginButton className="button-space" disableRipple color="inherit">Login / Register</LoginButton>
-                    </Link>
+                    </Link> */}
                 </Toolbar>
             </AppBar>
         </div>
