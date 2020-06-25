@@ -13,36 +13,38 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CardList(list) {
+export default function CardList(props) {
   const classes = useStyles();
 
-  const props = useSpring({
+  const animation = useSpring({
     opacity: 1,
     transform: "translate(0px, 0px)",
     from: { opacity: 0, transform: "translate(-40px, -40px)" }
   });
 
   return (
-    <animated.div style={props}>
+    <animated.div style={animation}>
+      <div>
 
-      <Card className={classes.root}>
-        <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image='../../Images/Home/whisky_wallpaper.jpg'
-            title="Whisky"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              Whisky
-          </Typography>
-            <Divider variant="middle" />
-            <Typography variant="body2" color="textSecondary" component="p">
-              Uma mistura de whiskies envelhecidos em maior parte com carvalho americano incluindo barris de bourbon. Uma mistura deliciosamente suave com uma camada doce de baunilha e caramelo. É a combinação de habilidades do nosso mestre da madeira e nosso mestre da mistura para criar o equilíbrio perfeito entre suavidade e doçura.
-          </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+        {props.list.map(el =>
+
+
+          <Card className={classes.root}>
+            <CardActionArea>
+              <CardMedia className={classes.media} image={el.imageUrl} title={el.name} />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {el.name}
+                </Typography>
+                <Divider variant="middle" />
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {el.description}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        )}
+      </div>
     </animated.div>
   );
 }

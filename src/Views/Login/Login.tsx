@@ -2,8 +2,9 @@ import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import {Container, Grid, Divider} from '@material-ui/core';
 import { toast } from 'react-toastify';
-import {useHistory} from "react-router-dom";
 import axios from 'axios';
+import {useHistory} from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -87,7 +88,7 @@ function Login() {
 
           localStorage.setItem('token',"Bearer " + res.data.token);
 
-          toast.success("Logado com sucesso!");
+          toast.success("Usuário logado com sucesso!");
           hist.push("/");
           refreshPage();
 

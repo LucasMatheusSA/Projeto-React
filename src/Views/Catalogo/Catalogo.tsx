@@ -6,6 +6,9 @@ import {Container, Grid, Divider} from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import ListCard from '../../Components/Card/CardList';
 
 import Card from '../../Components/Card/Card';
 
@@ -22,7 +25,34 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+
+function getWhiskies(){
+  let token = localStorage.getItem('token');
+    let config = {
+        headers: {
+            'Authorization': token
+        }
+    };
+    if (token == null) {
+        toast.error("Para visualizar os whiskies é necessario fazer login!");
+    } else {
+        axios.get(`https://project-whiskies-backend.herokuapp.com/api/whisky/whisky-list`, config)
+        .then(res => {
+            if (res.status == 403) {
+            }
+            console.log(res);
+            console.log(res.data);
+            return res.data;
+        })
+    }
+}
+
+
+
 function Catalogo() {
+
+  const list = getWhiskies();
+
   const classes = useStyles();
   return (
     <Container fixed>
@@ -82,6 +112,7 @@ function Catalogo() {
                     <Card />
                 </Grid>
             </Grid>
+            {/* <ListCard list={list}/> */}
       </div>
     </Container>
   );
