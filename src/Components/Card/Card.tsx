@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Divider } from '@material-ui/core';
-import { useSpring, animated } from 'react-spring'
-
+import { useSpring, animated } from 'react-spring';
 
 const useStyles = makeStyles({
   root: {
@@ -12,6 +11,7 @@ const useStyles = makeStyles({
     height: 350,
   },
 });
+
 
 export default function MediaCard() {
   const classes = useStyles();

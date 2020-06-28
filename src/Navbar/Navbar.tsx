@@ -12,29 +12,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import ButtonAccess from '../Components/Buttons/ButtonAccess';
 
-const LoginButton = withStyles({
-    root: {
-        boxShadow: 'none',
-        textTransform: 'none',
-        fontSize: 18,
-        padding: '6px 12px',
-        color: '#A67E6E',
-        lineHeight: 1.5,
-        float: 'right',
-        fontFamily: [
-            'Malaga',
-        ].join(','),
-        '&:hover': {
-            backgroundColor: '#3d3c3c',
-            boxShadow: 'none',
-        },
-        '&:active': {
-            boxShadow: 'none',
-            backgroundColor: '#52482B',
-            borderColor: '#52482B',
-        },
-    },
-})(Button);
 
 const CatalogButton = withStyles({
     root: {
@@ -94,7 +71,7 @@ theme.typography.h1 = {
     },
 };
 
-const permition = localStorage.getItem('permition') != "ROLE_ADMIN" ? localStorage.getItem('permition') == "ROLE_USER" ? 1 : 0 : 2;
+const permition = localStorage.getItem('permition') !== "ROLE_ADMIN" ? localStorage.getItem('permition') === "ROLE_USER" ? 1 : 0 : 2;
 
 export default function ButtonAppBar() {
     const classes = useStyles();
@@ -112,13 +89,10 @@ export default function ButtonAppBar() {
                         </Typography>
                         </ThemeProvider>
                     </Link>
-                    <Link to="/Catalogo" style={{ textDecoration: 'none', position: "absolute", right: 100 }} hidden={permition == 0}>
+                    <Link to="/Catalogo" style={{ textDecoration: 'none', position: "absolute", right: 100 }} hidden={permition === 0}>
                         <CatalogButton className="button-space" disableRipple color="inherit">Catálogo</CatalogButton>
                     </Link>
                     <ButtonAccess/>
-                    {/* <Link to="/Login" style={{ textDecoration: 'none', position: "absolute", right: 50 }}>
-                        <LoginButton className="button-space" disableRipple color="inherit">Login / Register</LoginButton>
-                    </Link> */}
                 </Toolbar>
             </AppBar>
         </div>
