@@ -6,6 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Chip from '@material-ui/core/Chip';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import {useHistory, Link} from "react-router-dom";
 
 
 const useStyles = makeStyles({
@@ -16,7 +17,6 @@ const useStyles = makeStyles({
     height: 350,
   },
 });
-
 
 export default function CardList(props) {
 
@@ -41,7 +41,7 @@ export default function CardList(props) {
         {props.list?.map(el =>
           <Grid item xs={4}>
 
-
+          <Link to={'/Whisky/' + el.uuid} style={{ textDecoration: 'none' }}>
             <Card className={classes.root}>
               <CardActionArea>
                 <CardMedia className={classes.media} image={el.imageUrl} title={el.name} />
@@ -51,13 +51,14 @@ export default function CardList(props) {
                   <br/>
                   <Divider variant="middle" />
                   <br/>
-                  <Typography variant="body2" color="textSecondary" component="p">
+                  <Typography variant="body2" color="textSecondary" component="p" >
                       Categoria: {el.category}    /   Volume: {el.vol}    /   Alcool: {el.alcohol}%
                   </Typography>
                   
                 </CardContent>
               </CardActionArea>
             </Card>
+          </Link>
 
 
           </Grid>

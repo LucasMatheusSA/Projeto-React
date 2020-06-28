@@ -3,6 +3,14 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Container, Grid, Divider } from '@material-ui/core';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+
+import CadastroUser from '../../Components/Login/userCadastro'
+import ListUsers from '../../Components/Lists/ListUser';
+import ListWhisky from '../../Components/Lists/ListWhisky';
+import CadastroWhisky from '../../Components/Login/whiskyCadastro';
+
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
@@ -17,7 +25,35 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import Card from '../../Components/Card/Card';
+
+const userCadastro = {
+  "login": "",
+  "senha": "",
+  "email": ""
+}
+
+const whiskyCadastro = {
+  "age": 0,
+  "alcohol": 0,
+  "category": "",
+  "chillFiltered": false,
+  "color": "",
+  "description": "",
+  "distillery": "",
+  "distilleryImageUrl": "",
+  "finish": "",
+  "flavors": "",
+  "imageUrl": "",
+  "name": "",
+  "nose": "",
+  "palate": "",
+  "region": "",
+  "singleCask": false,
+  "style": "",
+  "tasteNotes": "",
+  "type": "",
+  "vol": ""
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,126 +72,142 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-function createData(name: string, email: string) {
-  return { name, email };
+function refreshPage() {
+  window.location.reload(false);
 }
 
-const rows = [
-  createData('User 1', "teste@teste.com"),
-  createData('User 1', "teste@teste.com"),
-  createData('User 1', "teste@teste.com"),
-  createData('User 1', "teste@teste.com"),
-  createData('User 1', "teste@teste.com"),
-  createData('User 1', "teste@teste.com"),
-  createData('User 1', "teste@teste.com"),
-];
 
 function User() {
+
   const classes = useStyles();
+
+  function cadastrar(e) {
+    e.preventDefault();
+
+    userCadastro.login = e.target.elements.login.value;
+    userCadastro.senha = e.target.elements.senha.value;
+    userCadastro.email = e.target.elements.email.value;
+
+    axios.post(`https://project-whiskies-backend.herokuapp.com/api/user`, userCadastro)
+      .then(res => {
+        if (res.status == 200) {
+          toast.success("Usuário cadastrado com sucesso!");
+          refreshPage();
+        } else {
+          toast.error("Erro ao cadastrar usuário!");
+        }
+        console.log(res);
+        console.log(res.data);
+      })
+
+  }
+
+  function cadastrarW(e) {
+    e.preventDefault();
+
+    let token = localStorage.getItem('token');
+
+    let config = {
+      headers: {
+        'Authorization': token
+      }
+    };
+
+    whiskyCadastro.age = e.target.elements.age.value;
+    whiskyCadastro.alcohol = e.target.elements.alcohol.value;
+    whiskyCadastro.category = e.target.elements.category.value;
+    whiskyCadastro.description = e.target.elements.description.value;
+    whiskyCadastro.distillery = e.target.elements.distillery.value;
+    whiskyCadastro.distilleryImageUrl = e.target.elements.distilleryImageUrl.value;
+    whiskyCadastro.imageUrl = e.target.elements.imageUrl.value;
+    whiskyCadastro.name = e.target.elements.name.value;
+    whiskyCadastro.region = e.target.elements.region.value;
+    whiskyCadastro.tasteNotes = e.target.elements.tasteNotes.value;
+    whiskyCadastro.vol = e.target.elements.vol.value;
+
+    if(token === undefined){
+      
+    }
+
+    axios.post(`https://project-whiskies-backend.herokuapp.com/api/whisky/insert`, whiskyCadastro, config)
+      .then(res => {
+        if (res.status == 200) {
+          toast.success("Usuário cadastrado com sucesso!");
+          refreshPage();
+        } else {
+          toast.error("Erro ao cadastrar usuário!");
+        }
+        console.log(res);
+        console.log(res.data);
+      })
+
+  }
+
   return (
     <Container fixed>
       <div className={classes.root}>
-        <Grid container >
+        <Grid container spacing={2}>
 
           <Grid item xs={12}>
+
             <h1> Configurações de usuário </h1>
             <Divider variant="middle" />
-            <Grid container spacing={4}>
+
+            <br />
+
+            <Grid container spacing={1}>
+
               <Grid item xs={6}>
 
                 <h2> Cadastro de usuário </h2>
                 <Divider variant="middle" />
 
-                <Grid container spacing={3}>
-
-                    <Grid item xs={1}>
-                    </Grid>
-                    <Grid item xs={10}>
-                      <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">Login</InputLabel>
-                        <Input id="id-login-cadastro" name="login" />
-                      </FormControl>
-                    </Grid>
-                    <Grid item xs={1}>
-                    </Grid>
-
-                    <Grid item xs={1}>
-                    </Grid>
-                    <Grid item xs={10}>
-                      <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">Senha</InputLabel>
-                        <Input id="id-senha-cadastro" type="password" name="senha" />
-                      </FormControl>
-                    </Grid>
-                    <Grid item xs={1}>
-                    </Grid>
-
-                    <Grid item xs={1}>
-                    </Grid>
-                    <Grid item xs={10}>
-                      <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">E-mail</InputLabel>
-                        <Input id="id-email-cadastro" name="email" />
-                      </FormControl>
-                    </Grid>
-                    <Grid item xs={1}>
-                    </Grid>
-
-                    <Grid item xs={1}>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <Button type="submit" variant="contained" color="primary">Cadastrar</Button>
-                    </Grid>
-                    <Grid item xs={8}>
-                    </Grid>
-
-                </Grid>
+                <CadastroUser cadastrar={cadastrar} />
 
               </Grid>
+
               <Grid item xs={6}>
 
                 <h2> Listagem de usuários </h2>
                 <Divider variant="middle" />
 
-                <TableContainer component={Paper}>
-                  <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Nome</TableCell>
-                        <TableCell>E-mail</TableCell>
-                        <TableCell>Delete</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map((row) => (
-                        <TableRow key={row.name}>
-                          <TableCell >{row.name}</TableCell>
-                          <TableCell >{row.email}</TableCell>
-                          <TableCell >
-                            <IconButton aria-label="delete" className={classes.margin}>
-                              <DeleteIcon />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                <ListUsers />
 
               </Grid>
+
             </Grid>
+
           </Grid>
 
-        </Grid>
-        <Grid container spacing={6}>
-
+          <br /><br />
+          <br /><br />
 
           <Grid item xs={12}>
+
             <h1> Configurações de Whisky </h1>
             <Divider variant="middle" />
-            <Grid container spacing={4}>
 
+            <br />
 
+            <Grid container spacing={1}>
+
+              <Grid item xs={6}>
+
+                <h2> Cadastro de whisky </h2>
+                <Divider variant="middle" />
+
+                <CadastroWhisky cadastrar={cadastrarW} />
+
+              </Grid>
+
+              <Grid item xs={6}>
+
+                <h2> Listagem de whisky </h2>
+                <Divider variant="middle" />
+
+                <ListWhisky />
+
+              </Grid>
 
             </Grid>
           </Grid>

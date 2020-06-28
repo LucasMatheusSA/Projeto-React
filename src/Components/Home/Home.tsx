@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import { Container, Grid, Divider } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import ListCard from '../../Components/Card/CardList';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 import HomeImage from './HomeImage';
 import HalfImage from './HomeIformations';
 
 import Card from '../../Components/Card/Card';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,6 +22,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
+
 
 function Home() {
 

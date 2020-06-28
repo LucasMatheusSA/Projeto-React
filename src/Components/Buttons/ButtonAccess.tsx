@@ -99,7 +99,7 @@ export default function ButtonAccess() {
             </IconButton>
             <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose} >
                 <Link to="/User" hidden={permition != 2} >
-                    <MenuItem onClick={handleClose} >Configurações</MenuItem>
+                    <MenuItem onClick={handleClose} >Gerenciamento</MenuItem>
                 </Link>
                 <Link to="/Login">
                     <MenuItem onClick={handleCloseExit}>Sair</MenuItem>
