@@ -1,15 +1,10 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import {Container, Grid, Divider} from '@material-ui/core';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import {useHistory} from "react-router-dom";
-import 'react-toastify/dist/ReactToastify.css';
-
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import Button from '@material-ui/core/Button';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import CadastroUser from '../../Components/Login/userCadastro';
 import LoginUser from '../../Components/Login/userLogin';
@@ -24,6 +19,7 @@ const userLogin = {
   "login":"",
   "senha":""
 }
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -123,6 +119,7 @@ function Login() {
           </Grid>
 
         </Grid>
+        <ToastContainer />
       </div>
     </Container>
   );

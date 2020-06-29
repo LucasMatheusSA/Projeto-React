@@ -57,7 +57,7 @@ const ServerCadastroUser = (props) => {
 
                 <Grid item xs={6}>
                     <FormControl fullWidth className={classes.margin}>
-                        <InputLabel htmlFor="standard-adornment-amount">Destiladora</InputLabel>
+                        <InputLabel htmlFor="standard-adornment-amount">Destilaria</InputLabel>
                         <Input id="id-disillery-cadastro" name="disillery" />
                     </FormControl>
                 </Grid>

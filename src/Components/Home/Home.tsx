@@ -6,6 +6,7 @@ import axios from 'axios';
 import ListCard from '../../Components/Card/CardList';
 import HomeImage from './HomeImage';
 import HalfImage from './HomeIformations';
+import {useHistory} from "react-router-dom";
 
 import Card from '../../Components/Card/Card';
 
@@ -22,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
 
 
 function Home() {
@@ -44,7 +44,7 @@ function Home() {
       };
 
       if (token == null) {
-        toast.error("Para visualizar os whiskies é necessario fazer login!");
+        toast.error("Para visualizar os whiskies é necessario fazer login!!!");
       } else {
         axios.get(`https://project-whiskies-backend.herokuapp.com/api/whisky/whisky-list`, config)
           .then(res => {
@@ -52,7 +52,7 @@ function Home() {
                 setList(res.data.filter((el) => { return el.id > 7 && el.id < 14 }))
                 setList16(res.data.filter((el) => { return el.age === 16 }));
             }else{
-
+                toast.error("Erro na request!");
             }
           })
       }

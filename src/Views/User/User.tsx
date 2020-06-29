@@ -132,10 +132,10 @@ function User() {
     axios.post(`https://project-whiskies-backend.herokuapp.com/api/whisky/insert`, whiskyCadastro, config)
       .then(res => {
         if (res.status == 200) {
-          toast.success("Usuário cadastrado com sucesso!");
+          toast.success("Whisky cadastrado com sucesso!");
           refreshPage();
         } else {
-          toast.error("Erro ao cadastrar usuário!");
+          toast.error("Erro ao cadastrar Whisky!");
         }
         console.log(res);
         console.log(res.data);

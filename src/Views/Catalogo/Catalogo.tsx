@@ -45,12 +45,13 @@ function Catalogo() {
       };
 
       if (token == null) {
-        toast.error("Para visualizar os whiskies é necessario fazer login!");
+        toast.error("É necessario fazer login!");
         return null;
       } else {
         axios.get(`https://project-whiskies-backend.herokuapp.com/api/whisky/whisky-list`, config)
           .then(res => {
             if (res.status == 403) {
+              toast.error("Erro na request!");
             }
 
             console.log(res);

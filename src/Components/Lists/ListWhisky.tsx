@@ -88,14 +88,14 @@ const ListUser = () => {
             };
 
             if (token == null) {
-                toast.error("Para visualizar os whiskies é necessario fazer login!");
+                toast.error("É necessario fazer login!");
             } else {
                 axios.get(`https://project-whiskies-backend.herokuapp.com/api/whisky/whisky-list`, config)
                     .then(res => {
                         if (res.status === 200) {
                             setList(res.data);
                         } else {
-
+                            toast.error("Erro na request!");
                         }
                     })
             }
